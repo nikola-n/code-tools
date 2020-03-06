@@ -76,11 +76,22 @@
     <h1 class="text-center">Find the Best Programming Courses & Tutorials</h1>
     <div class="text-center">
         <form class="form-inline active-cyan-3 active-cyan-4">
-                <i class="fas fa-search fa-2x" aria-hidden="true"></i>
-                <input class="form-control form-control-sm ml-3 w-75" type="search" style="width: 70%; border: 0.1px solid #5a6268; border-radius: 4px;box-shadow: 1px 1px 8px gray; padding: 19px 20px; " placeholder="Search for the language you want to learn: PHP, Python, Javascript,.....">
+            <i class="fas fa-search fa-2x" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-3 w-75" type="search"
+                   style="width: 70%; border: 0.1px solid #5a6268; border-radius: 4px;box-shadow: 1px 1px 8px gray; padding: 19px 20px; "
+                   placeholder="Search for the language you want to learn: PHP, Python, Javascript,.....">
         </form>
     </div>
 
+    <form action="{{route('social.login', 'facebook')}}">
+        <button type="submit">Submit facebook</button>
+    </form>
+    <form action="{{route('social.login', 'github')}}">
+        <button type="submit">Submit github</button>
+    </form>
+    <form action="{{route('social.login', 'google')}}">
+        <button type="submit">Submit google</button>
+    </form>
     <div class="container">
 
         <div class="col-md-6">
@@ -116,5 +127,4 @@
     }, function () {
         $(this).css('background-color', 'white');
     });
-
 </script>
