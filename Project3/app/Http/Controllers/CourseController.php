@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
 
 class CourseController extends Controller
 {
-    //
-
     public  function  index()
     {
-        return Course::with('categories')->FilterBy->($request->all())
+//        dd(\request()->all());
+        //dd(Course::with('categories')->get() );
+
+        return Course::with('categories')->filterBy(request()->all())->get();
+
     }
 }

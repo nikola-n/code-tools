@@ -1,5 +1,8 @@
 <?php
-class QueryFilter{
+namespace App\Utilities;
+
+abstract class QueryFilter {
+
     protected $query;
     protected $filters;
 
@@ -10,8 +13,10 @@ class QueryFilter{
     }
     public function apply()
     {
+        //name e ime na kolona vo tablea, value se vrednostite
         foreach($this->filters as $name => $value)
         {
+            //method exists se odnesuva na metodite vo course filterot.
             if(! method_exists($this,$name)){
                 continue;
             }
@@ -20,7 +25,6 @@ class QueryFilter{
             }else {
                 $this->$name();
             }
-            //$query->orWhere($name,$value);
         }
         return $this->query;
     }

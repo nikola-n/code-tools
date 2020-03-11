@@ -18,9 +18,11 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('type');
+            $table->boolean('popular');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

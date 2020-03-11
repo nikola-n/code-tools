@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public  function categories()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public  function courses()
     {
-        return $this->hasMany()
+        return $this->BelongsToMany(Course::class,'categories_courses');
     }
 }
