@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public  function courses()
     {
-        return $this->BelongsToMany(Course::class,'categories_courses');
+        return $this->hasOne(Course::class);
     }
 }

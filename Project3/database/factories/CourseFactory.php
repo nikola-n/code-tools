@@ -1,16 +1,20 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/** @var Factory $factory */
 
 use App\Course;
 use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Course::class, function (Faker $faker) {
     return [
         'name'=>$faker->word,
-        'description'=>$faker->text(),
         'type'=>$faker->randomElement(['free','paid']),
-        'popular'=>$faker->boolean(50),
+        'level'=>$faker->randomElement(['beginner','advanced']),
+        'medium'=>$faker->randomElement(['book','video']),
+        'votes'=>$faker->randomNumber(50),
         'user_id'=>factory(App\User::class),
+        'category_id'=>factory(App\Category::class),
+        'languages_id'=>\factory(App\Language::class),
     ];
 });

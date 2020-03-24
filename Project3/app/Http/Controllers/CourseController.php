@@ -7,12 +7,27 @@ use App\Course;
 
 class CourseController extends Controller
 {
-    public  function  index()
+    public function index()
     {
-//        dd(\request()->all());
-        //dd(Course::with('categories')->get() );
+       $programming =  Course::with('categories')->where('category_id', 1)->get();
 
-        return Course::with('categories')->filterBy(request()->all())->get();
+        return response()->json(['success'=> 1, 'data' => $programming]);
+    }
+    public function dataScience()
+    {
+        $data_science = Course::with('categories')->where('category_id', 2)->get();
+        return response()->json(['success'=>1, 'data'=>$data_science]);
+    }
 
+    public function devops()
+    {
+        $devops = Course::with('categories')->where('category_id', 3)->get();
+        return response()->json(['success'=>1, 'data'=>$devops]);
+    }
+
+    public function design()
+    {
+        $design = Course::with('categories')->where('category_id', 4)->get();
+        return response()->json(['success'=>1, 'data'=>$design]);
     }
 }

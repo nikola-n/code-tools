@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -20,7 +21,7 @@ class SocialLoginController extends Controller
            'email'=>$socialUser->email,
            'name'=>$socialUser->name || 'some name',
        ]);
-       auth()->login($user);
+      auth()->login($user);
     return view('user.dashboard',compact('user'));
     }
 

@@ -10,11 +10,23 @@ class Course extends Model
 {
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'categories_courses' );
+        return $this->BelongsTo(Category::class,'category_id');
+    }
+    public function languages()
+    {
+        return $this->hasMany(Language::class,'languages_id');
+    }
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class,'course_technology');
+    }
+    public function users()
+    {
+        return $this->hasOne(User::class,'user_id');
     }
 
     /**
@@ -29,13 +41,13 @@ class Course extends Model
         return $appliedFilters->apply();
     }
 
-//    public function scopeFilters($query, $filters)
-//    {
-//      foreach($filters as $name => $value)
-//      {
-//        $query->orWhere('$name',$value);
-//      }
-//      return $query;
-//    }
+    public function scopeFilters($query, $filters)
+    {
+      foreach($filters as $name => $value)
+      {
+        $query->orWhere($name,$value);
+      }
+      return $query;
+    }
 
 }
