@@ -1,10 +1,10 @@
 img {
     height: 65px;
 }
+
 .navbar {
     font-size: 18px;
     border-bottom: 3px double #b9bbbe;
-    margin-bottom: 3%;
 }
 .navbar-light .navbar-nav .nav-link {
     color: black;
@@ -51,7 +51,7 @@ img {
     box-shadow: 1px 2px 7px gray;
     border-radius: 5px;
     padding:20px 40px;
-    margin-top:4%;
+    margin-top:2%;
 }
 .modal-title {
     font-weight: bolder;
@@ -109,5 +109,11 @@ img {
     color: white;
     border-radius: 9px;
 }
-
+.select2-container .select2-selection--single{
+    height:34px !important;
+}
+.select2-container--default .select2-selection--single{
+    border: 1px solid #ccc !important;
+    border-radius: 0px !important;
+}
 

@@ -17,17 +17,17 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('type');
-            $table->boolean('medium');
-            $table->boolean('level');
-            $table->integer('votes');
+            $table->string('medium');
+            $table->string('level');
+            $table->integer('votes')->default(0);
+            $table->boolean('approved')->default(0);
+            $table->string('url');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('languages_id');
+            $table->unsignedBigInteger('technology_id');
             $table->timestamps();
 
+            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('languages_id')->references('id')->on('languages')->onDelete('cascade');
         });
     }
 

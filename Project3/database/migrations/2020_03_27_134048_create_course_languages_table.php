@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseTechnologyTable extends Migration
+class CreateCourseLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateCourseTechnologyTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_technology', function (Blueprint $table) {
+        Schema::create('course_languages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('technology_id');
+            $table->unsignedBigInteger('language_id');
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateCourseTechnologyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_technology');
+        Schema::dropIfExists('course_languages');
     }
 }

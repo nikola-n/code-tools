@@ -10,7 +10,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/62a9ef6f3e.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -24,13 +24,13 @@
 <div id="app">
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <a href="{{route('programming')}}" class="navbar-brand">
-            <img src="img/brainster.png" alt="logo">
+            <img src="/img/brainster.png" alt="logo">
         </a>
         <div class="collapse navbar-collapse" id="navbarsExample03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('programming')}}">
-                        <span class="{{ Request::is('/') || Request::is('home') ? 'active' : ''  }}">
+                        <span class="{{ Request::is('/') || Request::is('home')  ? 'active' : ''  }}">
                     <i class="fas fa-american-sign-language-interpreting"></i>
                         Programming
                 </span>
@@ -65,7 +65,7 @@
             <ul class="navbar-nav ml-auto top-right links">
                 <!-- Authentication Links -->
                 @guest
-                    <a href="#" class="tutorial" id="addTutorial">
+                    <a href="#" type="button" id="newTutorial" class="tutorial">
                                           <span>
                                           <i class="fas fa-plus" style="color:blue;"></i>
                                           </span>
@@ -76,7 +76,7 @@
                         </a>
                     @endif
                 @else
-                    <a href="#" class="tutorial" id="addTutorial">
+                    <a href="#" class="tutorial" data-toggle="modal" data-target="#addTutorial">
                                           <span>
                                           <i class="fas fa-plus" style="color:blue;"></i>
                                           </span>
@@ -105,11 +105,14 @@
     </nav>
 
     <main class="py-4">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         @yield('content')
     </main>
 </div>
 @include('partials.login')
 @include('partials.register')
+@include('partials.create')
 @yield('scripts')
 </body>
 </html>
@@ -117,15 +120,24 @@
 
     $(document).ready(function () {
         var loggedIn = {{ auth()->check() ? 'true' : 'false' }};
-        $('#addTutorial').on('click', function (e) {
+        $('#newTutorial').on('click', function (e) {
             e.preventDefault();
             if (!loggedIn) {
                 swal("Oops..", "Please sign in first");
-            } else {
-                window.location = "/create";
+            }else{
+             $('#addTutorial').modal('show');
             }
         })
     })
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+    $('#nameID').select2({
+        placeholder: 'Python, Angular, etc.',
+        multiple : true
+    });
 </script>
 
 

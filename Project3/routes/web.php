@@ -11,8 +11,11 @@
 |
 */
 
+use App\Course;
+
 Route::get('/', function () {
-    return view('welcome');
+   $courses = Course::all();
+    return view('welcome',compact('courses'));
 })->name('programming');
 
 Route::get('/data-science', function () {
@@ -35,6 +38,9 @@ Route::get('login/{provider}','SocialLoginController@redirect')->name('social.lo
 Route::get('login/{provider}/callback','SocialLoginController@callback');
 
 
-Route::get('courses','CourseController@index');
+Route::get('courses','TechnologyController@index');
 Route::get('categories','CategoryController@index');
-Route::get('tutorials/{name}','CourseController@index')->name('tutorials');
+Route::get('tutorials/{name}','CoursesController@index')->name('tutorials');
+//Route::get('/','CoursesController@create')->name('create');
+Route::post('/','CoursesController@store')->name('store');
+

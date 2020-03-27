@@ -8,25 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function categories()
-    {
-        return $this->BelongsTo(Category::class,'category_id');
-    }
     public function languages()
     {
-        return $this->hasMany(Language::class,'languages_id');
+        return $this->BelongsToMany(Language::class,'course_languages');
+    }
+
+    public function users()
+    {
+        return $this->BelongsTo(User::class,'user_id');
+    }
+    public function subcategories()
+    {
+        return $this->belongsToMany(Subcategory::class,'course_subcategory');
     }
     public function technologies()
     {
-        return $this->belongsToMany(Technology::class,'course_technology');
-    }
-    public function users()
-    {
-        return $this->hasOne(User::class,'user_id');
+        return $this->BelongsTo(Technology::class);
     }
 
     /**

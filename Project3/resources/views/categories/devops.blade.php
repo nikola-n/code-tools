@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid">
-        <h1 class="text-center">Find the Best Programming Courses & Tutorials</h1>
+        <h1 class="text-center mt-5">Find the Best Programming Courses & Tutorials</h1>
         <div class="text-center">
             <form class="form-inline active-cyan-3 active-cyan-4">
                 <i class="fas fa-search fa-2x" aria-hidden="true"></i>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="container-fluid col-md-10 col-md-offset-1">
-        <div class="row" id="courses">
+        <div class="row"style="justify-content: space-evenly;" id="courses">
 
         </div>
     </div>
@@ -23,15 +23,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
-    function getCourses() {
+    function getTechnologies() {
         $.get('api/devops', function (data) {
                 console.log(data);
                 $('#courses').html('');
                 $.each(data.data, function (index, value) {
                     $('#courses').append(
-                        "<div class='col-md-4' style='display: flex;'>" +
-                        " <a class='col-md-12 courses-style' href='#'>" + value.name + "</a>" +
-                        "</div>");
+                        '<div class="col-md-4 courses-style" style="display: flex; align-items: center; max-width: 30%">' +
+                        '<img class="img-fluid" style="width:50px;" href="/tutorials/'+value.name+'"src="'+value.img+'">'+
+                        '<a class="col-md-12" href="/tutorials/'+value.name+'">'+value.name+'</a>' +
+                        '</div>');
                 });
             }
         );
@@ -40,6 +41,6 @@
 
 
     $(document).ready(function () {
-        getCourses();
+        getTechnologies();
     })
 </script>
