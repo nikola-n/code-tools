@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/','CoursesController@store');
 Route::get('/','TechnologyController@index');
 Route::get('/data-science','TechnologyController@dataScience');
 Route::get('/devops','TechnologyController@devops');
 Route::get('/design','TechnologyController@design');
+Route::post('tutorials/{name}','CoursesController@addVote');

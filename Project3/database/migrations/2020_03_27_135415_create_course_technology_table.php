@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseSubcategoryTable extends Migration
+class CreateCourseTechnologyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateCourseSubcategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_subcategory', function (Blueprint $table) {
+        Schema::create('course_technology', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('subcategory_id');
-            $table->unique(['course_id', 'subcategory_id']);
+            $table->unsignedBigInteger('technology_id');
+            $table->unique(['course_id', 'technology_id']);
 
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateCourseSubcategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_subcategory');
+        Schema::dropIfExists('course_technology');
     }
 }

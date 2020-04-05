@@ -38,6 +38,11 @@ class User extends Authenticatable
     ];
     public function courses()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class,'user_id');
     }
+    public function votes()
+    {
+        return $this->belongsToMany(Course::class,'course_user');
+    }
+
 }

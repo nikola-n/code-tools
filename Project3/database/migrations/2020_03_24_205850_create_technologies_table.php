@@ -15,7 +15,7 @@ class CreateTechnologiesTable extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('technology_name');
             $table->string('img');
             $table->unsignedBigInteger('category_id');
             $table->timestamps();

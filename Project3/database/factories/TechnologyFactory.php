@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Technology::class, function (Faker $faker) {
     return [
-        'name'=>$faker->word,
+        'technology_name'=>$faker->word,
         'img'=>$faker->imageUrl(),
         'category_id'=>factory(App\Category::class),
 

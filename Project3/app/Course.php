@@ -8,22 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    protected $guarded = [];
     public function languages()
     {
-        return $this->BelongsToMany(Language::class,'course_languages');
+        return $this->belongsToMany(Language::class,'course_languages');
     }
 
     public function users()
     {
-        return $this->BelongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
     public function subcategories()
     {
-        return $this->belongsToMany(Subcategory::class,'course_subcategory');
+        return $this->belongsToMany(Subcategory::class,'course_subcategory')->withTimestamps();
     }
     public function technologies()
     {
-        return $this->BelongsTo(Technology::class);
+        return $this->BelongsToMany(Technology::class,'course_technology')->withTimestamps();
+    }
+    public function votes()
+    {
+        return $this->belongsToMany(User::class, 'course_user');
     }
 
     /**

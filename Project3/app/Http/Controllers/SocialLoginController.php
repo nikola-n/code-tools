@@ -22,7 +22,7 @@ class SocialLoginController extends Controller
         if ($my_user === null) {
             Auth::login(User::firstOrCreate([
                 'email' => $socialUser->email,
-                'name' => $socialUser->user->given_name,
+                'name' => $socialUser->name,
             ]));
         } else {
             Auth::login($my_user);

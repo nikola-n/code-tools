@@ -136,7 +136,8 @@
 <script>
     $('#nameID').select2({
         placeholder: 'Python, Angular, etc.',
-        multiple : true
+        multiple : true,
+
     });
 </script>
 

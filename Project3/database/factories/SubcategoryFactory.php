@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Subcategory::class, function (Faker $faker) {
     return [
-        'name'=>$faker->word
+        'subcategory_name'=>$faker->word
     ];
 });

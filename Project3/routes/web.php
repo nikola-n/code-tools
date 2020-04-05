@@ -11,23 +11,32 @@
 |
 */
 
-use App\Course;
+use App\Language;
+use App\Subcategory;
 
 Route::get('/', function () {
-   $courses = Course::all();
-    return view('welcome',compact('courses'));
+    $languages = Language::all();
+   $subcategories = Subcategory::all();
+    return view('welcome',compact('subcategories','languages'));
 })->name('programming');
 
 Route::get('/data-science', function () {
-   return view ('categories.data_science');
+    $languages = Language::all();
+    $subcategories = Subcategory::all();
+   return view ('categories.data_science',compact('subcategories','languages'));
 })->name('data-science');
 
 Route::get('/devops', function () {
-   return view ('categories.devops');
+    $languages = Language::all();
+    $subcategories = Subcategory::all();
+   return view ('categories.devops',compact('subcategories','languages'));
 })->name('devops');
 
 Route::get('/design', function () {
-   return view ('categories.design');
+
+    $languages = Language::all();
+    $subcategories = Subcategory::all();
+   return view ('categories.design',compact('subcategories','languages'));
 })->name('design');
 
 Auth::routes();
@@ -38,9 +47,10 @@ Route::get('login/{provider}','SocialLoginController@redirect')->name('social.lo
 Route::get('login/{provider}/callback','SocialLoginController@callback');
 
 
-Route::get('courses','TechnologyController@index');
-Route::get('categories','CategoryController@index');
-Route::get('tutorials/{name}','CoursesController@index')->name('tutorials');
-//Route::get('/','CoursesController@create')->name('create');
 Route::post('/','CoursesController@store')->name('store');
+Route::get('tutorials/{name}','CoursesController@index')->name('tutorials');
+Route::post('tutorials/{name}', 'CoursesController@addVote')->name('votes');
+Route::put('/tutorials/{id}', 'CoursesController@unVote');
+//Route::get('courses','TechnologyController@index');
+//Route::get('categories','CategoryController@index');
 

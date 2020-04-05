@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Category::class, function (Faker $faker) {
     return [
-         'name'=>$faker->word,
+         'category_name'=>$faker->word,
     ];
 });

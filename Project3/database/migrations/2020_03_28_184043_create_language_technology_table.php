@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubcategoryTechnologyTable extends Migration
+class CreateLanguageTechnologyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateSubcategoryTechnologyTable extends Migration
      */
     public function up()
     {
-        Schema::create('subcategory_technology', function (Blueprint $table) {
-            $table->unsignedBigInteger('subcategory_id');
+        Schema::create('language_technology', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('language_id');
             $table->unsignedBigInteger('technology_id');
             $table->timestamps();
-            $table->bigIncrements('id');
 
-            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
             $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class CreateSubcategoryTechnologyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subcategory_technology');
+        Schema::dropIfExists('language_technology');
     }
 }

@@ -26,20 +26,20 @@
                     <div class="text-white-50 p-1 pl-2 bg-secondary mb-4">Tell us more about this tutorial (optional)
                     </div>
                     <div class="form-group">
-                        <input type="text" name="description" class="form-control @error('name') is-invalid @enderror"
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                placeholder="Enter course name"
                                autocomplete="description" autofocus>
-                        @error('description')
+                        @error('name')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
-                    <div class="form-group">
-                        <select id="nameID" multiple name="name[]" class="form-control">
+                    <div class="form-group mt-3">
+                        <select id="nameID" multiple name="subcategory_name[]" class="form-control" style="width: 100% !important;">
                             <option></option>
-{{--                            @foreach($courses as $c)--}}
-{{--                                <option value="{{$c->id}}">{{$c->name}}</option>--}}
-{{--                            @endforeach--}}
+                            @foreach($subcategories as $subcategory)
+                                <option value="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</option>
+                            @endforeach
                         </select>
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -87,15 +87,11 @@
                         <div class="tag-label d-inline mr-3">
                             <label for="type">Language:</label>
                         </div>
-                        <div     class="radio-checkbox">
-                            <input type="radio" name="language_id" class="@error('language_id') is-invalid @enderror"
-                                   value="English"> English
-                            <input type="radio" name="language_id" class=" @error('language_id') is-invalid @enderror"
-                                   value="French"> French
-                            <input type="radio" name="language_id" class=" @error('language_id') is-invalid @enderror"
-                                   value="German"> German
-                            <input type="radio" name="language_id" class=" @error('language_id') is-invalid @enderror"
-                                   value="Spanish"> Spanish
+                        <div class="radio-checkbox">
+                            @foreach($languages as $language)
+                            <input type="checkbox" name="languages[]" class="@error('languages') is-invalid @enderror"
+                                   value="{{$language->id}}">{{$language->language_name}}
+                                @endforeach
                         </div>
                         @error('level')
                         <span class="invalid-feedback" role="alert">
@@ -106,6 +102,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>

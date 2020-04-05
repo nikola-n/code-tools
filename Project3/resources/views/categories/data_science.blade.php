@@ -52,8 +52,8 @@
                 $.each(data.data, function (index, value) {
                     $('#courses').append(
                         '<div class="col-md-4 courses-style" style="display: flex; align-items: center; max-width: 30%">' +
-                        '<img class="img-fluid" style="width:50px;" href="/tutorials/'+value.name+'"src="'+value.img+'">'+
-                        '<a class="col-md-12" href="/tutorials/'+value.name+'">'+value.name+'</a>' +
+                        '<img class="img-fluid" style="width:50px;" href="/tutorials/'+value.technology_name+'"src="'+value.img+'">'+
+                        '<a class="col-md-12" href="/tutorials/'+value.technology_name+'">'+value.technology_name+'</a>' +
                         '</div>');
                 });
             }
