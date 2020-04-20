@@ -1,4 +1,4 @@
-<div class="modal fade" id="addTutorial"  role="dialog" aria-labelledby="addTutorial"
+<div class="modal fade" id="addTutorial" role="dialog" aria-labelledby="addTutorial"
      aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -34,38 +34,47 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
+                    </div>
                     <div class="form-group mt-3">
-                        <select id="nameID" multiple name="subcategory_name[]" class="form-control" style="width: 100% !important;">
-                            <option></option>
-                            @foreach($subcategories as $subcategory)
-                                <option value="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</option>
-                            @endforeach
-                        </select>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+                        <div>
+                            <label for="nameID"></label>
+                            <select id="nameID" multiple
+                                    name="subcategory[]"
+                                    class="form-control"
+                                    style="width: 100% !important;">
+                                <option></option>
+                                @foreach($subcategories as $subcategory)
+                                    <option value="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('subcategory'))
+                                <p class="text-danger" role="alert">
+                                    {{ $errors->first('subcategory') }}
+                                </p>
+                            @endif
+                        </div>
                     </div>
                     <div class="form-group d-flex justify-content-between mt-3">
                         <div class="tag-label d-inline mr-3">
                             <label for="type">Tags:</label>
                         </div>
                         <div class="radio-checkbox">
-                            <input type="radio" name="type" class="@error('type') is-invalid @enderror" value="free">
+                            <input type="radio" name="type" class="@error('type') is-invalid @enderror"
+                                   value="free">
                             Free
-                            <input type="radio" name="type" class=" @error('type') is-invalid @enderror" value="paid">
+                            <input type="radio" name="type" class=" @error('type') is-invalid @enderror"
+                                   value="paid">
                             Paid
                             <input type="radio" name="medium" class=" @error('medium') is-invalid @enderror ml-2"
                                    value="book"> Book
                             <input type="radio" name="medium" class=" @error('medium') is-invalid @enderror"
                                    value="video"> Video
-                        </div>
-                        @error('type')
-                        <span class="invalid-feedback" role="alert">
+                            @error('type')
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                        @enderror
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group d-flex justify-content-between mt-2">
                         <div class="tag-label d-inline mr-3">
@@ -76,12 +85,12 @@
                                    value="beginner"> Beginner
                             <input type="radio" name="level" class=" @error('level') is-invalid @enderror"
                                    value="advanced"> Advanced
-                        </div>
-                        @error('level')
-                        <span class="invalid-feedback" role="alert">
+                            @error('level')
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                        @enderror
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group d-flex justify-content-between mt-2">
                         <div class="tag-label d-inline mr-3">
@@ -89,23 +98,31 @@
                         </div>
                         <div class="radio-checkbox">
                             @foreach($languages as $language)
-                            <input type="checkbox" name="languages[]" class="@error('languages') is-invalid @enderror"
-                                   value="{{$language->id}}">{{$language->language_name}}
-                                @endforeach
-                        </div>
-                        @error('level')
-                        <span class="invalid-feedback" role="alert">
+                                <input type="checkbox" name="languages[]"
+                                       class="@error('languages') is-invalid @enderror"
+                                       value="{{$language->id}}"> {{$language->language_name}}
+                            @endforeach
+                            @error('languages')
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                        @enderror
-                    </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            @enderror
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="button" class="btn btn-primary btn-block">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    @if (count($errors) > 0)
+    $('#addTutorial').modal('show');
+    @endif
+</script>
 

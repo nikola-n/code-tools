@@ -14,7 +14,7 @@
                     <div class="login-buttons text-center">
                         <form action="{{route('social.login', 'google')}}">
                             <button class="btn-outline-light" type="submit">
-                                <img style="height: 50px" src="https://hackr.io/assets/images/google-signin-dark.png">
+                                <img style="height: 50px" src="https://hackr.io/assets/images/google-signin-dark.png" alt="google">
                             </button>
                         </form>
                     </div>
@@ -34,6 +34,7 @@
                 <div class="divider-with-text">
                     <span class="divider-text text-uppercase">or</span>
                 </div>
+
                 <form action="{{route('login')}}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -43,11 +44,9 @@
                                    required autocomplete="email" autofocus>
                             <i class="far fa-envelope icon-form"></i>
                         </div>
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                        @enderror
+                        @if($errors->has('email'))
+                            <p class="text-danger">{{ $errors->first('email') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <div class="input-with-icon">
@@ -56,14 +55,12 @@
                                    placeholder="Password"
                                    required autocomplete="current-password">
                             <i class="fas fa-lock icon-form"></i>
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            @if($errors->has('password'))
+                                <p class="text-danger">{{ $errors->first('password') }}</p>
+                            @endif
                         </div>
                     </div>
-                    <div class="form-group" style="display: flex;justify-content: space-between;margin-left:6%;">
+                    <div class="form-group d-flex justify-content-between ml-3">
                         <div>
                             <input class="form-check-input" type="checkbox" name="remember"
                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -89,6 +86,7 @@
 
 @section('scripts')
     @parent
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     @if($errors->has('email') || $errors->has('password'))
         <script>
             $(function () {

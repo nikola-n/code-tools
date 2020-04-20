@@ -12,7 +12,6 @@ $factory->define(Course::class, function (Faker $faker) {
         'type'=>$faker->randomElement(['free','paid']),
         'level'=>$faker->randomElement(['beginner','advanced']),
         'medium'=>$faker->randomElement(['book','video']),
-        'votes'=>$faker->randomNumber(),
         'url'=>$faker->url,
         'approved'=>$faker->boolean,
         'user_id'=>factory(App\User::class),

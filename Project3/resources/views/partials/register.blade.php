@@ -42,19 +42,18 @@
                             <input type="text" name="name" class="form-control pleft" placeholder="Full Name"
                                    autocomplete="name" autofocus>
                             <i class="fas fa-user icon-form"></i>
-
-                            <span class="invalid-feedback" role="alert" id="nameError">
-                                <strong></strong>
-                            </span>
+                        @if($errors->has('name'))
+                                <p class="text-danger">{{ $errors->first('name') }}</p>
+                        @endif
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-with-icon">
                             <input type="email" name="email" class="form-control pleft" placeholder="Email"required autocomplete="email">
                             <i class="far fa-envelope icon-form"></i>
-                            <span class="invalid-feedback" role="alert" id="emailError">
-                                <strong></strong>
-                            </span>
+                            @if($errors->has('email'))
+                                <p class="text-danger">{{ $errors->first('email') }}</p>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
@@ -62,19 +61,16 @@
                             <input type="password" name="password" class="form-control pleft" placeholder="Password"
                                    required autocomplete="new-password">
                             <i class="fas fa-lock icon-form"></i>
-                            <span class="invalid-feedback" role="alert" id="passwordError">
-                                <strong></strong>
-                            </span>
+                            @if($errors->has('password'))
+                                <p class="text-danger">{{ $errors->first('password') }}</p>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
                             <input id="password-confirm" type="password" class="form-control pleft" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                         <i class="fas fa-lock icon-form"></i>
-                        <span class="invalid-feedback" role="alert" id="passwordError">
-                                <strong></strong>
-                            </span>
                     </div>
-                    <div class="helper-text">Minimum 6 characters</div>
+                    <div class="helper-text">Minimum 8 characters</div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Create Account</button>
                     </div>
@@ -86,38 +82,3 @@
         </div>
     </div>
 </div>
-
-@section('scripts')
-    @parent
-
-    <script>
-        $(function () {
-            $('#registerForm').submit(function (e) {
-                e.preventDefault();
-                let formData = $(this).serializeArray();
-                $(".invalid-feedback").children("strong").text("");
-                $("#registerForm input").removeClass("is-invalid");
-                $.ajax({
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json"
-                    },
-                    url: "{{ route('register') }}",
-                    data: formData,
-                    success: () => window.location.assign("{{ route('programming') }}"),
-                    error: (response) => {
-                        if(response.status === 422) {
-                            let errors = response.responseJSON.errors;
-                            Object.keys(errors).forEach(function (key) {
-                                $("#" + key + "Input").addClass("is-invalid");
-                                $("#" + key + "Error").children("strong").text(errors[key][0]);
-                            });
-                        } else {
-                            window.location.reload();
-                        }
-                    }
-                })
-            });
-        })
-    </script>
-@endsection

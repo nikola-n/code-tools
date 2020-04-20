@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Utilities\TechnologyFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Technology extends Model
@@ -15,5 +17,11 @@ class Technology extends Model
     {
         return $this->belongsToMany(Course::class,'course_technology')->withTimestamps();
     }
-    
+    public function scopeFilterBy(Builder $query, array $filters)
+    {
+        $appliedFilters = new TechnologyFilter($query, $filters);
+
+        return $appliedFilters->apply();
+    }
+
 }

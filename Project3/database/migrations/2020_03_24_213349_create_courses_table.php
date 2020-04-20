@@ -19,7 +19,6 @@ class CreateCoursesTable extends Migration
             $table->string('type');
             $table->string('medium');
             $table->string('level');
-            $table->integer('votes')->default(0);
             $table->boolean('approved')->default(0);
             $table->string('url');
             $table->unsignedBigInteger('user_id');

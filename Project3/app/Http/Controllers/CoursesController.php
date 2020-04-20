@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Http\Requests\CourseRequest;
 use App\Language;
 use App\Subcategory;
 use App\Technology;
 use App\User;
+use App\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CoursesController extends Controller {
+
     public function index($name)
     {
         $languages = Language::all();
         $subcategories = Subcategory::all();
+//        $courses = Course::withCount()->get();
         $technologies = Technology::with('courses.subcategories', 'courses.languages','courses.votes')->where('technology_name', $name)->first();
 
         $type = [];
@@ -41,26 +46,13 @@ class CoursesController extends Controller {
         $subcategory = array_count_values($subcategory);
         $language = array_count_values($language);
 
-
         return view('courses', compact('technologies', 'languages', 'subcategories', 'type', 'medium', 'level', 'subcategory', 'language'));
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $validateCourse = $request->validate([
-            'name' => 'required|max:200',
-            'type' => 'required',
-            'medium' => 'required',
-            'level' => 'required',
-            'url' => 'required',
-            //   'subcategory_name' => 'max:3|exists:subcategory_name,id'
-        ]);
-        $course = new Course();
-        $course->name = $request->name;
-        $course->type = $request->type;
-        $course->medium = $request->medium;
-        $course->url = $request->url;
-        $course->level = $request->level;
+        $this->validateCourse();
+        $course = new Course(request(['name','type','medium','level','url']));
         $course->user_id = auth()->user()->id;
         $course->save();
         $course->subcategories()->attach(request('subcategory_name'));
@@ -70,14 +62,25 @@ class CoursesController extends Controller {
         return redirect(route('programming'));
     }
 
-
-
-    public function addVote($id)
+    public function validateCourse() : array
     {
-        Course::where('id',$id)->increment('votes',1);
+        return request()->validate([
+            'name' => 'required|max:100',
+            'type' => 'required',
+            'medium' => 'required',
+            'level' => 'required',
+            'url' => 'required|max:200|url',
+            'subcategory'=>'required|array|max:3',
+            'languages'=>'required',
+        ]);
     }
 
+    public function filters()
+    {
+        $filtered = Course::with('subcategories')->filterBy(request()->all())->get();
 
+        return view('courses',compact($filtered));
+    }
 
 
 

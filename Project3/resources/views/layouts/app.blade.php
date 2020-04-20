@@ -31,7 +31,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('programming')}}">
                         <span class="{{ Request::is('/') || Request::is('home')  ? 'active' : ''  }}">
-                    <i class="fas fa-american-sign-language-interpreting"></i>
+                    <i class="fas fa-code"></i>
                         Programming
                 </span>
                     </a>
@@ -65,7 +65,7 @@
             <ul class="navbar-nav ml-auto top-right links">
                 <!-- Authentication Links -->
                 @guest
-                    <a href="#" type="button" id="newTutorial" class="tutorial">
+                    <a href="#" type="button" id="newTutorial">
                                           <span>
                                           <i class="fas fa-plus" style="color:blue;"></i>
                                           </span>
@@ -76,13 +76,15 @@
                         </a>
                     @endif
                 @else
-                    <a href="#" class="tutorial" data-toggle="modal" data-target="#addTutorial">
-                                          <span>
+                    <a href="#" type="button" class="tutorial" data-toggle="modal" data-target="#addTutorial">
+                                            <span>
                                           <i class="fas fa-plus" style="color:blue;"></i>
                                           </span>
-                        Submit a tutorial</a>
+                        Submit a tutorial
+                    </a>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="dropdown-toggle" style="color: coral; font-weight: bolder;font-size: 20px" href="#" role="button"
+                        <a id="navbarDropdown" class="dropdown-toggle"
+                           style="color: coral; font-weight: bolder;font-size: 20px" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
@@ -103,42 +105,38 @@
             </ul>
         </div>
     </nav>
-
     <main class="py-4">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         @yield('content')
     </main>
 </div>
+@include('partials.create')
 @include('partials.login')
 @include('partials.register')
-@include('partials.create')
 @yield('scripts')
+<script src="http://unpkg.com/turbolinks"></script>
 </body>
 </html>
 <script>
-
     $(document).ready(function () {
         var loggedIn = {{ auth()->check() ? 'true' : 'false' }};
         $('#newTutorial').on('click', function (e) {
             e.preventDefault();
             if (!loggedIn) {
                 swal("Oops..", "Please sign in first");
-            }else{
-             $('#addTutorial').modal('show');
+            } else {
+                $('#addTutorial').modal('show');
             }
         })
     })
 </script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
     $('#nameID').select2({
         placeholder: 'Python, Angular, etc.',
-        multiple : true,
-
+        multiple: true,
     });
 </script>
-
-

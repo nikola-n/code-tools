@@ -11,46 +11,36 @@
 |
 */
 
-use App\Language;
-use App\Subcategory;
+use App\Course;
 
-Route::get('/', function () {
-    $languages = Language::all();
-   $subcategories = Subcategory::all();
-    return view('welcome',compact('subcategories','languages'));
-})->name('programming');
+//technologies routes
 
-Route::get('/data-science', function () {
-    $languages = Language::all();
-    $subcategories = Subcategory::all();
-   return view ('categories.data_science',compact('subcategories','languages'));
-})->name('data-science');
+    Route::get('/', 'TechnologyController@programming')->name('programming');
+    Route::get('/data-science', 'TechnologyController@dataScience')->name('data-science');
+    Route::get('/devops', 'TechnologyController@devOps')->name('devops');
+    Route::get('/design', 'TechnologyController@design')->name('design');
 
-Route::get('/devops', function () {
-    $languages = Language::all();
-    $subcategories = Subcategory::all();
-   return view ('categories.devops',compact('subcategories','languages'));
-})->name('devops');
 
-Route::get('/design', function () {
-
-    $languages = Language::all();
-    $subcategories = Subcategory::all();
-   return view ('categories.design',compact('subcategories','languages'));
-})->name('design');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+//socialite routes
 Route::get('login/{provider}','SocialLoginController@redirect')->name('social.login');
 Route::get('login/{provider}/callback','SocialLoginController@callback');
 
-
+//courses routes
 Route::post('/','CoursesController@store')->name('store');
 Route::get('tutorials/{name}','CoursesController@index')->name('tutorials');
-Route::post('tutorials/{name}', 'CoursesController@addVote')->name('votes');
-Route::put('/tutorials/{id}', 'CoursesController@unVote');
-//Route::get('courses','TechnologyController@index');
+Route::get('/recent',function () {
+    return Course::with('subcategories')->latest()->get();
+});
+//Route::get('courses','CoursesController@index');
 //Route::get('categories','CategoryController@index');
 
+Route::get('filtered', function (){
+    return Course::with('subcategories')->filterBy(request()->all())->get();
+});
+
+Route::post('/votes/{course}','CourseVotesController@store');
+
+Route::get('/admin','AdminController@index');

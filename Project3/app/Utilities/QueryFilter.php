@@ -13,7 +13,7 @@ abstract class QueryFilter {
     }
     public function apply()
     {
-        //name e ime na kolona vo tablea, value se vrednostite
+        //name e ime na kolona vo tabela/ime na metod, value se vrednostite sto gi davame vo url
         foreach($this->filters as $name => $value)
         {
             //method exists se odnesuva na metodite vo course filterot.

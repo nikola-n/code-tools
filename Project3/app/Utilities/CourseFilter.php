@@ -9,20 +9,25 @@ class CourseFilter extends QueryFilter
 
     public function type($type = '')
     {
-         $this->query->where('type',$type);
+         $this->query->where('type', $type);
     }
     public function name($name = '')
     {
-        $this->query->where('name',$name);
+        $this->query->where('name', $name);
     }
-    public function category($category = '')
+    public function medium($medium = '')
     {
-        $this->query->whereHas('categories',function($q) use ($category) {
-           $q->where('name', $category);
-        });
+        $this->query->where('medium', $medium);
     }
     public function popular()
     {
-        $this->query->where('popular',1)->orderBy('name');
+        $this->query->orderBy('votes','desc');
     }
+    public function category($category = '')
+    {
+        $this->query->whereHas('subcategories',function($q) use ($category) {
+           $q->where('subcategory_name', $category);
+        });
+    }
+
 }
