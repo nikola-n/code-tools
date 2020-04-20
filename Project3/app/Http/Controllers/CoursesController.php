@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\Http\Requests\CourseRequest;
 use App\Language;
 use App\Subcategory;
 use App\Technology;
-use App\User;
-use App\Vote;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class CoursesController extends Controller {
 
@@ -59,7 +55,7 @@ class CoursesController extends Controller {
         $course->languages()->attach(request('languages'));
         $course->technologies()->sync([1, 2, 3, 4]);
 
-        return redirect(route('programming'));
+        return redirect()->route('programming')->with('message', 'You course was successfully added! It will be review and we will let you know if it is approved as soon as possible!');
     }
 
     public function validateCourse() : array

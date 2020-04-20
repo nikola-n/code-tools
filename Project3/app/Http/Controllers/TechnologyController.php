@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Subcategory;
+use App\User;
 use Illuminate\Http\Request;
 use App\Technology;
 use App\Language;

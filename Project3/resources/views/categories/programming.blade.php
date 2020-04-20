@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+    @if(session()->has('message'))
+        <div class="alert alert-success text-center">
+            {{ session()->get('message') }}
+        </div>
+    @endif
     <div class="container-fluid">
         <h1 class="text-center mt-5">Find the Best Programming Courses & Tutorials</h1>
         <div class="text-center">
