@@ -15,11 +15,8 @@ class RoleCheck
      */
     public function handle($request, Closure $next)
     {
-        $users = \DB::table('users');
-        if($users->roles = 1)
-            return redirect()->route('/admin');
-        else {
-            return redirect()->route('programming');
+        if (\Auth::user()->roles == 1){
+            return redirect('/admin');
         }
         return $next($request);
     }

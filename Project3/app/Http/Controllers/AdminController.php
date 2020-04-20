@@ -2,14 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all()->where('approved', 0)->get();
+        $courses = \DB::table('courses')->orderBy('approved', 'asc')->get();
 
-        return view('admin', compact('courses'));
+        return view('admin.admin', compact('courses'));
+    }
+
+    public function approve($id)
+    {
+        $course = Course::find($id);
+        $course->approved = 1;
+        $course->save();
+
+        return redirect('/admin');
+    }
+    public function destroy($id)
+    {
+        $course = Course::where('id',$id)->delete();
+        return redirect('/admin');
     }
 }

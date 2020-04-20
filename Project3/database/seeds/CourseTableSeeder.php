@@ -13,8 +13,8 @@ class CourseTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Course::class, 20)->create()->each(function ($course) {
-            $course->categories()->save(factory(Category::class)->make());
-        });
+//        factory(Course::class, 20)->create()->each(function ($course) {
+//            $course->subcategories()->save(factory(Category::class)->make());
+//        });
     }
 }

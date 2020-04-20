@@ -14,11 +14,13 @@
 use App\Course;
 
 //technologies routes
-
+Route::middleware('RoleCheck')->group(function()
+{
     Route::get('/', 'TechnologyController@programming')->name('programming');
     Route::get('/data-science', 'TechnologyController@dataScience')->name('data-science');
     Route::get('/devops', 'TechnologyController@devOps')->name('devops');
     Route::get('/design', 'TechnologyController@design')->name('design');
+});
 
 
 
@@ -43,4 +45,7 @@ Route::get('filtered', function (){
 
 Route::post('/votes/{course}','CourseVotesController@store');
 
+//admin routes
 Route::get('/admin','AdminController@index');
+Route::post('/admin/approve/{id}','AdminController@approve');
+Route::post('/admin/delete/{id}','AdminController@destroy');
