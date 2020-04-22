@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -24,7 +25,7 @@ class AdminController extends Controller
     }
     public function destroy($id)
     {
-        $course = Course::where('id',$id)->delete();
+        Course::where('id',$id)->delete();
         return redirect('/admin');
     }
 }

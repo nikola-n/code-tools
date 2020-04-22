@@ -11,11 +11,16 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('users')->insert([
-            'name'=>'admin',
-            'email'=>'admin@admin',
-            'password'=>Hash::make('admin'),
-            'roles'=>1,
-            ]);
+        $check = \DB::table('users')->where('role', 'admin')->count();
+        if(empty($check))
+        {
+            \DB::table('users')->insert(
+                [
+                    'name' => 'admin',
+                    'email' => 'admin@admin',
+                    'role' => 'admin',
+                    'password' => \Hash::make('admin'),
+                ]);
+        }
     }
 }

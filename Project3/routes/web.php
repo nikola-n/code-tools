@@ -14,6 +14,7 @@
 use App\Course;
 
 //technologies routes
+    Auth::routes();
 
     Route::get('/', 'TechnologyController@programming')->name('programming');
     Route::get('/data-science', 'TechnologyController@dataScience')->name('data-science');
@@ -21,9 +22,6 @@ use App\Course;
     Route::get('/design', 'TechnologyController@design')->name('design');
 
 
-
-
-Auth::routes();
 
 //socialite routes
 Route::get('login/{provider}','SocialLoginController@redirect')->name('social.login');
