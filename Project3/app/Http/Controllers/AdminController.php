@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $courses = \DB::table('courses')->orderBy('approved', 'asc')->get();
+        $courses = \DB::table('courses')->orderBy('approved', 'asc')->paginate(10);
 
         return view('admin.admin', compact('courses'));
     }

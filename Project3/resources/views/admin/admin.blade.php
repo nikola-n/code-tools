@@ -11,19 +11,19 @@
 <body>
 <table class="table table-striped text-center">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Medium</th>
-            <th>Level</th>
-            <th>URL</th>
-            <th>Approved</th>
-        </tr>
-    </thead>
-        @foreach($courses as $course)
-    <tbody>
     <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Medium</th>
+        <th>Level</th>
+        <th>URL</th>
+        <th>Approved</th>
+    </tr>
+    </thead>
+    @foreach($courses as $course)
+        <tbody>
+        <tr>
             <td>{{$course->id}}</td>
             <td>{{$course->name}}</td>
             <td>{{$course->type}}</td>
@@ -37,18 +37,21 @@
                         @csrf
                         <button type="submit" class="btn btn-success">Approve</button>
                     </form>
-                <td>
             <td>
-            <form action="{{URL::to('/admin/delete')}}/{{$course->id}}"method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">Don't Approve</button>
-            </form>
+            <td>
+                <form action="{{URL::to('/admin/delete')}}/{{$course->id}}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Don't Approve</button>
+                </form>
             </td>
-                @endif
-    </tr>
-    </tbody>
-        @endforeach
-
+            @endif
+        </tr>
+        </tbody>
+    @endforeach
 </table>
+<div style="margin-left: 43%">
+    {{$courses->links()}}
+</div>
+
 </body>
 </html>

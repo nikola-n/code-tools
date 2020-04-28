@@ -119,4 +119,7 @@ img {
 .select2-container {
     width: 100%;!important;
 }
-
+.btn-dark:hover {
+    background-color: darkgreen;
+    border: darkgreen;
+}

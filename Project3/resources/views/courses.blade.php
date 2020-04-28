@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    <div class="text-center">
+        @include('flash::message')
+    </div>
 
     <div class="container">
         <div class="row">
@@ -90,13 +93,26 @@
                     @foreach($technologies->courses as $tutorial)
                         <div class="col-md-12 d-flex border-bottom selected bg-white">
                             <div class="col-md-1 p-3">
-                                <form action="{{URL::to('votes')}}/{{$tutorial->id}}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-dark btn-lg" id="vote">
-                                        <i class="fas fa-caret-up fa-2x"></i>
-                                        {{$tutorial->votes->count() ?: 0 }}
-                                    </button>
-                                </form>
+{{--                                @foreach($tutorial->votes as $voted)--}}
+{{--                                @if($voted->voted != 0)--}}
+                                    <form action="{{URL::to('votes')}}/{{$tutorial->id}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-dark btn-lg" id="vote">
+                                            <i class="fas fa-caret-up fa-2x"></i>
+                                            {{$tutorial->votes->count() ?: 0 }}
+                                        </button>
+                                    </form>
+{{--                                @else--}}
+{{--                                    <form action="{{URL::to('votes')}}/{{$tutorial->id}}" method="POST">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        <button type="submit" class="btn btn-dark btn-lg" id="vote">--}}
+{{--                                            <i class="fas fa-caret-up fa-2x"></i>--}}
+{{--                                            {{$tutorial->votes--?: 0 }}--}}
+{{--                                        </button>--}}
+{{--                                    </form>--}}
+{{--                                @endif--}}
+{{--                                @endforeach--}}
                             </div>
                             <div class="col-md-11 p-3 ml-3">
                                 <a href="{{$tutorial->url}}"

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseVotesController extends Controller
 {
@@ -36,7 +37,11 @@ class CourseVotesController extends Controller
      */
     public function store(Course $course)
     {
-        $course->vote(auth()->user()->id);
+        if(auth()->check())
+        {
+            $course->vote(auth()->user()->id);
+        } else
+            flash('Sorry, you must Sign In first to give your Vote!')->error();
 
         return back();
     }
@@ -78,11 +83,15 @@ class CourseVotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vote  $vote
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Vote $vote)
+    public function destroy(Course $course)
     {
-        //
+        if(Auth::check())
+        {
+            $course->unvote();
+        }
+        return back();
     }
 }

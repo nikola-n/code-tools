@@ -41,9 +41,9 @@ Route::get('filtered', function (){
 });
 
 Route::post('/votes/{course}','CourseVotesController@store');
+Route::delete('/votes/{course}','CourseVotesController@destroy');
 
 //admin routes
 Route::get('/admin','AdminController@index');
 Route::post('/admin/approve/{id}','AdminController@approve');
 Route::post('/admin/delete/{id}','AdminController@destroy');
-
