@@ -39,17 +39,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Course::class,'user_id');
     }
-//    public function vote(Course $course)
-//    {
-//        $votes = \DB::table('votes')->increment('number_of_votes',1);
-//        return $this->votes()->save($course, ['number_of_votes' => $votes]);
-//    }
-//
-//    public function votes()
-//    {
-//        return $this->belongsToMany(Course::class, 'course_user','user_id','course_id')->withPivot('number_of_votes')->withTimestamps();
-//    }
-
 
     public function scopeFilterBy($query, $filters)
     {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Vote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CourseVotesController extends Controller
 {
@@ -88,10 +87,6 @@ class CourseVotesController extends Controller
      */
     public function destroy(Course $course)
     {
-        if(Auth::check())
-        {
-            $course->unvote();
-        }
-        return back();
+
     }
 }

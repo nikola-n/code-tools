@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Technology extends Model
 {
-
     public function categories()
     {
         return $this->belongsTo(Category::class,'category_id');

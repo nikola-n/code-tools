@@ -33,15 +33,13 @@ Route::get('tutorials/{name}','CoursesController@index')->name('tutorials');
 Route::get('/recent',function () {
     return Course::with('subcategories')->latest()->get();
 });
-//Route::get('courses','CoursesController@index');
-//Route::get('categories','CategoryController@index');
 
 Route::get('filtered', function (){
     return Course::with('subcategories')->filterBy(request()->all())->get();
 });
 
+//Vote button
 Route::post('/votes/{course}','CourseVotesController@store');
-Route::delete('/votes/{course}','CourseVotesController@destroy');
 
 //admin routes
 Route::get('/admin','AdminController@index');

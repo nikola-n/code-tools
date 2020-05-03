@@ -29,10 +29,6 @@ class Course extends Model
     {
         return $this->BelongsToMany(Technology::class,'course_technology')->withTimestamps();
     }
-//    public function votes()
-//    {
-//        return $this->belongsToMany(User::class, 'course_user')->withPivot('number_of_votes')->withTimestamps();
-//    }
 
     /**
      * @param Builder $query
@@ -45,14 +41,5 @@ class Course extends Model
 
         return $appliedFilters->apply();
     }
-
-//    public function scopeFilters($query, $filters)
-//    {
-//      foreach($filters as $name => $value)
-//      {
-//        $query->orWhere($name,$value);
-//      }
-//      return $query;
-//    }
 
 }

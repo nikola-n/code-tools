@@ -14,9 +14,9 @@ class CoursesController extends Controller {
     {
         $languages = Language::all();
         $subcategories = Subcategory::all();
-//        $courses = Course::withCount()->get();
-        $technologies = Technology::with('courses.subcategories', 'courses.languages','courses.votes')->where('technology_name', $name)->first();
-
+        $technologies = Technology::with('courses.subcategories', 'courses.languages','courses.votes')
+            ->where('technology_name', $name)
+            ->first();
         $type = [];
         $medium = [];
         $level = [];
@@ -77,38 +77,5 @@ class CoursesController extends Controller {
 
         return view('courses',compact($filtered));
     }
-
-
-
-
-
-//    public function saveVote(Request $request ,$id)
-//    {
-//        $vote = auth()->user();
-//        $vote->votes()->attach(request('name'));
-//        $vote->votes()->attach()
-//    }
-//    public function unVote(User $user)
-//    {
-//        return $this->votes()->detach($user);
-//    }
-//    public function voted(User $user)
-//    {
-//        return $this->votes()->where('user_id', $user->id)->exists();
-//    }
-//
-//    public function toggleVote(User $user)
-//    {
-//        if($this->voted($user)){
-//            return $this->unVote($user);
-//        }
-//        return $this->saveVote($user);
-//    }
-
-//    public function addVote(User $user)
-//    {
-//        auth()->user()->toggleVote($user);
-////        return back();
-//    }
 
 }

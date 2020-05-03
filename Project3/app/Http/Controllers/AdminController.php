@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $courses = \DB::table('courses')->orderBy('approved', 'asc')->paginate(10);
 
