@@ -99,7 +99,7 @@
                                         @csrf
                                         <button type="submit" class="btn btn-dark btn-lg" id="vote">
                                             <i class="fas fa-caret-up fa-2x"></i>
-                                            {{$tutorial->votes->count() ?: 0 }}
+                                            {{ $tutorial->votesCount ?: 0 }}
                                         </button>
                                     </form>
 {{--                                @else--}}

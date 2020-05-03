@@ -5,6 +5,7 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 trait Votable {
 
@@ -35,13 +36,30 @@ trait Votable {
             ]
         );
     }
+    public function unvote()
+    {
+        $this->votes()->where('user_id' , Auth::user()->id)
+            ->delete();
+    }
 
-//    public function unvote()
-//    {
-//        $this->votes()->delete();
-//    }
-//    public function toggleVote(User $user)
-//    {
-//        $this->votes()->toggle($user);
-//    }
+    public function isVoted()
+    {
+        return $this->votes()
+            ->where('user_id', Auth::id())
+            ->count();
+    }
+
+    public function toggle()
+    {
+        if($this->isVoted()) {
+            return !! $this->unvote();
+        }
+        return $this->vote();
+    }
+
+    public function getVotesCountAttribute()
+    {
+        return $this->votes()->count();
+    }
+
 }

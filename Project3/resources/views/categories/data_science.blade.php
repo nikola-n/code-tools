@@ -15,7 +15,7 @@
     <div class="container-fluid col-md-10 col-md-offset-1">
         <div class="row" style="justify-content: space-evenly;" id="courses">
             @foreach($data_science as $data)
-                <div class="col-md-4 courses-stylebg-white d-flex align-items-center" style="max-width: 30%">
+                <div class="col-md-4 courses-style bg-white d-flex align-items-center" style="max-width: 30%">
                     <a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="{{URL::to('tutorials')}}/{{$data->technology_name}}">
                         <img class="img-fluid mr-2" style="width:50px;" src="{{$data->img}}"/>
                         {{$data->technology_name}}

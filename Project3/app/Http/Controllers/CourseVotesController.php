@@ -39,7 +39,7 @@ class CourseVotesController extends Controller
     {
         if(auth()->check())
         {
-            $course->vote(auth()->user()->id);
+            $course->toggle();
         } else
             flash('Sorry, you must Sign In first to give your Vote!')->error();
 
