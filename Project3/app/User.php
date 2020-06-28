@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use UserFilter;
@@ -24,7 +23,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -35,14 +35,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public function courses()
     {
-        return $this->hasMany(Course::class,'user_id');
+        return $this->hasMany(Course::class, 'user_id');
     }
 
     public function scopeFilterBy($query, $filters)
     {
-        $userFilter = new UserFilter($query, $filters );
+        $userFilter = new UserFilter($query, $filters);
 
         return $filtered->apply();
     }

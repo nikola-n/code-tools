@@ -10,29 +10,32 @@ class Course extends Model
 {
     use Votable;
 
-    protected $fillable = ['name','type','medium','level','url'];
+    protected $fillable = ['name', 'type', 'medium', 'level', 'url'];
 
     public function languages()
     {
-        return $this->belongsToMany(Language::class,'course_languages');
+        return $this->belongsToMany(Language::class, 'course_languages');
     }
 
     public function users()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
+
     public function subcategories()
     {
-        return $this->belongsToMany(Subcategory::class,'course_subcategory')->withTimestamps();
+        return $this->belongsToMany(Subcategory::class, 'course_subcategory')->withTimestamps();
     }
+
     public function technologies()
     {
-        return $this->BelongsToMany(Technology::class,'course_technology')->withTimestamps();
+        return $this->BelongsToMany(Technology::class, 'course_technology')->withTimestamps();
     }
 
     /**
      * @param Builder $query
-     * @param array $filters
+     * @param array   $filters
+     *
      * @return Builder
      */
     public function scopeFilterBy(Builder $query, array $filters)

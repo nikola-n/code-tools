@@ -17,7 +17,7 @@
             @foreach($data_science as $data)
                 <div class="col-md-4 courses-style bg-white d-flex align-items-center" style="max-width: 30%">
                     <a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="{{URL::to('tutorials')}}/{{$data->technology_name}}">
-                        <img class="img-fluid mr-2" style="width:50px;" src="{{$data->img}}"/>
+                        <img class="img-fluid mr-2" style="width:50px;" src="{{$data->img}}" />
                         {{$data->technology_name}}
                     </a>
                 </div>
@@ -41,7 +41,7 @@
                     $.each(data.searchData, function (index, value) {
                         $("#courses").append(
                             '<div class="col-md-4 courses-style d-flex align-items-center" style="max-width: 30%">' +
-                            '<img class="img-fluid mr-2" style="width:50px;" href="/tutorials/'+value.technology_name+'"src="'+value.img+'">'+
+                            '<img class="img-fluid mr-2" style="width:50px;" href="/tutorials/' + value.technology_name + '"src="' + value.img + '">' +
                             '<a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="/tutorials/' + value.technology_name + '">' + value.technology_name + '</a>' +
                             '</div>');
                     })

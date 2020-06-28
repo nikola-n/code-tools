@@ -8,10 +8,11 @@ class Subcategory extends Model
 {
     public function technologies()
     {
-        return $this->belongsToMany(Technology::class,'subcategory_technology');
+        return $this->belongsToMany(Technology::class, 'subcategory_technology');
     }
+
     public function courses()
     {
-        return $this->belongsToMany(Course::class,'course_subcategory');
+        return $this->belongsToMany(Course::class, 'course_subcategory');
     }
 }

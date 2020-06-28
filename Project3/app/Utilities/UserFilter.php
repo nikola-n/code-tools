@@ -2,7 +2,8 @@
 
 use App\Utilities\QueryFilter;
 
-class UserFilter extends QueryFilter {
+class UserFilter extends QueryFilter
+{
 
     public function email($email = '')
     {

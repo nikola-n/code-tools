@@ -22,7 +22,7 @@
 
                     <h1>{{$technologies->technology_name}} Tutorials and Courses</h1>
                     <h5 class="mb-5">Learn {{$technologies->technology_name}} online from the
-                        best {{$technologies->technology_name}} tutorials & voted by the programming
+                                     best {{$technologies->technology_name}} tutorials & voted by the programming
                         <br> community.</h5>
                 </div>
             </div>
@@ -90,44 +90,47 @@
                 </div>
                 <div id="c">
                     @foreach($technologies->courses as $tutorial)
-                        <div class="col-md-12 d-flex border-bottom selected bg-white">
-                            <div class="col-md-1 p-3">
-                                <form action="{{URL::to('votes')}}/{{$tutorial->id}}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-dark btn-lg" id="vote">
-                                        <i class="fas fa-caret-up fa-2x"></i>
-                                        {{ $tutorial->votesCount ?: 0 }}
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-md-11 p-3 ml-3">
-                                <a href="{{$tutorial->url}}"
-                                   class="h5 font-weight-bolder text-decoration-none text-dark">{{$tutorial->name}}<span
-                                        class="small"> ({{$tutorial->url}})</span></a>
-                                <p>Submitted by {{$tutorial->users->name}}</p>
-                                <div class="tags">
-                                    <button class="bg-dark"><a href="#"
-                                                               class="font-weight-bolder"><?=ucwords($tutorial->type)?></a>
-                                    </button>
-                                    <button class="bg-dark"><a href="#"
-                                                               class="font-weight-bolder"><?=ucwords($tutorial->medium)?></a>
-                                    </button>
-                                    <button class="bg-dark"><a href="#"
-                                                               class="font-weight-bolder"><?=ucwords($tutorial->level)?></a>
-                                    </button>
-                                    @foreach($tutorial->subcategories as $sub)
-                                        <button class="bg-dark"><a href="#"
-                                                                   class="font-weight-bolder"><?=ucwords($sub->subcategory_name)?></a>
+                        @if($tutorial->approved === 1)
+                            <div class="col-md-12 d-flex border-bottom selected bg-white">
+                                <div class="col-md-1 p-3">
+                                    <form action="{{URL::to('votes')}}/{{$tutorial->id}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-dark btn-lg" id="vote">
+                                            <i class="fas fa-caret-up fa-2x"></i>
+                                            {{ $tutorial->votesCount ?: 0 }}
                                         </button>
-                                    @endforeach
-                                    @foreach($tutorial->languages as $lan)
+                                    </form>
+                                </div>
+                                <div class="col-md-11 p-3 ml-3">
+                                    <a href="{{$tutorial->url}}"
+                                       class="h5 font-weight-bolder text-decoration-none text-dark">{{$tutorial->name}}
+                                        <span
+                                            class="small"> ({{$tutorial->url}})</span></a>
+                                    <p>Submitted by {{$tutorial->users->name}}</p>
+                                    <div class="tags">
                                         <button class="bg-dark"><a href="#"
-                                                                   class="font-weight-bolder"><?=ucwords($lan->language_name)?></a>
+                                                                   class="font-weight-bolder"><?=ucwords($tutorial->type)?></a>
                                         </button>
-                                    @endforeach
+                                        <button class="bg-dark"><a href="#"
+                                                                   class="font-weight-bolder"><?=ucwords($tutorial->medium)?></a>
+                                        </button>
+                                        <button class="bg-dark"><a href="#"
+                                                                   class="font-weight-bolder"><?=ucwords($tutorial->level)?></a>
+                                        </button>
+                                        @foreach($tutorial->subcategories as $sub)
+                                            <button class="bg-dark"><a href="#"
+                                                                       class="font-weight-bolder"><?=ucwords($sub->subcategory_name)?></a>
+                                            </button>
+                                        @endforeach
+                                        @foreach($tutorial->languages as $lan)
+                                            <button class="bg-dark"><a href="#"
+                                                                       class="font-weight-bolder"><?=ucwords($lan->language_name)?></a>
+                                            </button>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         {{--                        {{ $tutorial->links() }}--}}
                     @endforeach
                 </div>

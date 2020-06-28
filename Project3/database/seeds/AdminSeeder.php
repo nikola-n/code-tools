@@ -12,13 +12,12 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $check = \DB::table('users')->where('role', 'admin')->count();
-        if(empty($check))
-        {
+        if (empty($check)) {
             \DB::table('users')->insert(
                 [
-                    'name' => 'admin',
-                    'email' => 'admin@admin',
-                    'role' => 'admin',
+                    'name'     => 'admin',
+                    'email'    => 'admin@admin',
+                    'role'     => 'admin',
                     'password' => \Hash::make('admin'),
                 ]);
         }

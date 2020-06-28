@@ -18,14 +18,14 @@
     </div>
     <div class="container-fluid col-md-10 col-md-offset-1">
         <div class="row justify-content-around" id="courses">
-        @foreach($programming as $program)
-            <div class="col-md-4 courses-style bg-white d-flex align-items-center" style="max-width: 30%">
-                <a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="{{URL::to('tutorials')}}/{{$program->technology_name}}">
-                <img class="img-fluid mr-2" style="width:50px;" src="{{$program->img}}"/>
-                    {{$program->technology_name}}
-                </a>
-            </div>
-        @endforeach
+            @foreach($programming as $program)
+                <div class="col-md-4 courses-style bg-white d-flex align-items-center" style="max-width: 30%">
+                    <a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="{{URL::to('tutorials')}}/{{$program->technology_name}}">
+                        <img class="img-fluid mr-2" style="width:50px;" src="{{$program->img}}" />
+                        {{$program->technology_name}}
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection
@@ -36,7 +36,7 @@
             $('#query').on('keyup', function () {
                 $.ajax({
                     url: "{{URL::to('api/')}}",
-                    data: {"query": $('#query').val(),' _token' : '{{ csrf_token() }}'},
+                    data: {"query": $('#query').val(), ' _token': '{{ csrf_token() }}'},
                     dataType: "json",
                     method: "GET",
                 }).done(function (data) {
@@ -44,7 +44,7 @@
                     $.each(data.searchData, function (index, value) {
                         $("#courses").append(
                             '<div class="col-md-4 courses-style d-flex align-items-center" style="max-width: 30%">' +
-                            '<img class="img-fluid mr-2" style="width:50px;" href="/tutorials/'+value.technology_name+'"src="'+value.img+'">'+
+                            '<img class="img-fluid mr-2" style="width:50px;" href="/tutorials/' + value.technology_name + '"src="' + value.img + '">' +
                             '<a class="col-md-12 text-decoration-none text-danger" href="/tutorials/' + value.technology_name + '">' + value.technology_name + '</a>' +
                             '</div>');
                     })

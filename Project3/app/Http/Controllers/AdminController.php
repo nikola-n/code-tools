@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\User;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -17,15 +15,16 @@ class AdminController extends Controller
 
     public function approve($id)
     {
-        $course = Course::find($id);
+        $course           = Course::find($id);
         $course->approved = 1;
         $course->save();
 
         return redirect('/admin');
     }
+
     public function destroy($id)
     {
-        Course::where('id',$id)->delete();
+        Course::where('id', $id)->delete();
         return redirect('/admin');
     }
 }

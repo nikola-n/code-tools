@@ -18,4 +18,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/', 'TechnologyController@search');
-//Route::get('tutorials/{name}', 'CoursesController@addVote')->name('votes');

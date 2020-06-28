@@ -1,24 +1,21 @@
 <?php
 
-
 namespace App;
 
-
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-trait Votable {
+trait Votable
+{
 
-//    public function scopeWithVotes(Builder $query)
-//    {
-//        $query->leftJoinSub(
-//            'select course_id, sum(voted) votes from votes group by course_id',
-//            'votes',
-//            'votes.course_id',
-//            'courses.id'
-//        );
-//    }
-
+    //    public function scopeWithVotes(Builder $query)
+    //    {
+    //        $query->leftJoinSub(
+    //            'select course_id, sum(voted) votes from votes group by course_id',
+    //            'votes',
+    //            'votes.course_id',
+    //            'courses.id'
+    //        );
+    //    }
 
     public function votes()
     {
@@ -29,16 +26,17 @@ trait Votable {
     {
         $this->votes()->updateOrCreate(
             [
-                'user_id' => $user = auth()->id()
+                'user_id' => $user = auth()->id(),
             ],
             [
                 'voted' => $voted,
             ]
         );
     }
+
     public function unvote()
     {
-        $this->votes()->where('user_id' , Auth::user()->id)
+        $this->votes()->where('user_id', Auth::user()->id)
             ->delete();
     }
 
@@ -51,8 +49,8 @@ trait Votable {
 
     public function toggle()
     {
-        if($this->isVoted()) {
-            return !! $this->unvote();
+        if ($this->isVoted()) {
+            return ! ! $this->unvote();
         }
         return $this->vote();
     }

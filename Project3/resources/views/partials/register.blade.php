@@ -42,14 +42,14 @@
                             <input type="text" name="name" class="form-control pleft" placeholder="Full Name"
                                    autocomplete="name" autofocus>
                             <i class="fas fa-user icon-form"></i>
-                        @if($errors->has('name'))
+                            @if($errors->has('name'))
                                 <p class="text-danger">{{ $errors->first('name') }}</p>
-                        @endif
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-with-icon">
-                            <input type="email" name="email" class="form-control pleft" placeholder="Email"required autocomplete="email">
+                            <input type="email" name="email" class="form-control pleft" placeholder="Email" required autocomplete="email">
                             <i class="far fa-envelope icon-form"></i>
                             @if($errors->has('email'))
                                 <p class="text-danger">{{ $errors->first('email') }}</p>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                            <input id="password-confirm" type="password" class="form-control pleft" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="form-control pleft" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                         <i class="fas fa-lock icon-form"></i>
                     </div>
                     <div class="helper-text">Minimum 8 characters</div>

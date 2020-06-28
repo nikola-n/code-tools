@@ -11,8 +11,9 @@ class Language extends Model
         return $this->hasMany(Course::class);
 
     }
+
     public function technologies()
     {
-        return $this->belongsToMany(Technology::class,'language_technology');
+        return $this->belongsToMany(Technology::class, 'language_technology');
     }
 }

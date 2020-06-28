@@ -48,7 +48,7 @@
                     <a class="nav-link" href="{{route('devops')}}">
                     <span class="{{ Request::is('devops') ? 'active' : ''  }}">
                         <i class="fas fa-infinity"></i>
-                    devOps
+                    DevOps
                 </span>
                     </a>
                 </li>
@@ -56,7 +56,7 @@
                     <a class="nav-link" href="{{route('design')}}">
                       <span class="{{ Request::is('design') ? 'active' : '' }}">
                         <i class="fas fa-paint-brush"></i>
-                      design
+                      Design
                 </span>
                     </a>
                 </li>
@@ -72,7 +72,7 @@
                         Submit a tutorial</a>
                     @if(Route::has('register') ||  Route::has('login'))
                         <a type="button" class="sign" href="#" data-toggle="modal" data-target="#userSign">Sign Up /
-                            Sign In
+                                                                                                           Sign In
                         </a>
                     @endif
                 @else
@@ -106,7 +106,7 @@
         </div>
     </nav>
     <main class="py-4">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         @yield('content')
     </main>
@@ -116,8 +116,6 @@
 @include('partials.register')
 @yield('scripts')
 <script src="http://unpkg.com/turbolinks"></script>
-</body>
-</html>
 <script>
     $(document).ready(function () {
         var loggedIn = {{ auth()->check() ? 'true' : 'false' }};
@@ -131,7 +129,7 @@
         })
     })
 </script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
@@ -140,3 +138,5 @@
         multiple: true,
     });
 </script>
+</body>
+</html>
