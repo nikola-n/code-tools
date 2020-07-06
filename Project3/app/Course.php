@@ -5,10 +5,11 @@ namespace App;
 use App\Utilities\CourseFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Course extends Model
 {
-    use Votable;
+    use Votable, Notifiable;
 
     protected $fillable = ['name', 'type', 'medium', 'level', 'url'];
 
@@ -45,4 +46,8 @@ class Course extends Model
         return $appliedFilters->apply();
     }
 
+    public function getEmailAttribute()
+    {
+        return $this->users->email;
+    }
 }

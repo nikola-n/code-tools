@@ -20,7 +20,7 @@
         <div class="row justify-content-around" id="courses">
             @foreach($programming as $program)
                 <div class="col-md-4 courses-style bg-white d-flex align-items-center" style="max-width: 30%">
-                    <a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="{{URL::to('tutorials')}}/{{$program->technology_name}}">
+                    <a class="col-md-12 text-decoration-none text-danger font-weight-bolder" href="{{URL::to('tutorials', $program->technology_name)}}">
                         <img class="img-fluid mr-2" style="width:50px;" src="{{$program->img}}" />
                         {{$program->technology_name}}
                     </a>

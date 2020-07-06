@@ -27,4 +27,9 @@ class TechnologyFilter extends QueryFilter
             $q->where('type', $types);
         });
     }
+
+    public function type($type = '')
+    {
+        $this->query->where('type', $type);
+    }
 }

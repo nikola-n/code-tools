@@ -27,7 +27,7 @@ Route::get('login/{provider}/callback', 'SocialLoginController@callback');
 
 //courses routes
 Route::post('/', 'CoursesController@store')->name('store');
-Route::get('tutorials/{name}', 'CoursesController@index')->name('tutorials');
+Route::get('tutorials/{technology_name}', 'CoursesController@index')->name('tutorials');
 Route::get('/recent', function () {
     return Course::with('subcategories')->latest()->get();
 });

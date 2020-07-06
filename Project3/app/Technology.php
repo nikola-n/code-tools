@@ -25,4 +25,9 @@ class Technology extends Model
         return $appliedFilters->apply();
     }
 
+    public function getRouteKeyName()
+    {
+        return 'technology_name';
+    }
+
 }

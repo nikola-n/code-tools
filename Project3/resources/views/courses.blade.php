@@ -36,9 +36,7 @@
                 <div class="mb-2">
                     @foreach($type as $t)
                         @if($loop->first)
-                            <form method="get" action="#">
-                                <input type="checkbox" name="type" id="free" value="free"> Free ({{$t}})
-                            </form>
+                                <input type="checkbox" name="type" id="free" value="free"> Free ({{$t}}) <br>
                         @endif
                         @if($loop->last)
                             <input type="checkbox" name="type" id="paid" value="paid"> Paid ({{$t}})
@@ -69,7 +67,7 @@
                     @endforeach
                 </div>
                 <p class="font-wight-bolder mb-1">Version</p>
-                @foreach($subcategory as $key=>$value)
+                @foreach($subcategory as $key => $value)
                     <div class="mb-2">
                         <input type="checkbox" name="course"> {{$key}} ({{$value}})
                     </div>
@@ -118,13 +116,13 @@
                                                                    class="font-weight-bolder"><?=ucwords($tutorial->level)?></a>
                                         </button>
                                         @foreach($tutorial->subcategories as $sub)
-                                            <button class="bg-dark"><a href="#"
-                                                                       class="font-weight-bolder"><?=ucwords($sub->subcategory_name)?></a>
+                                            <button class="bg-dark">
+                                                <a href="#" class="font-weight-bolder"><?=ucwords($sub->subcategory_name)?></a>
                                             </button>
                                         @endforeach
                                         @foreach($tutorial->languages as $lan)
-                                            <button class="bg-dark"><a href="#"
-                                                                       class="font-weight-bolder"><?=ucwords($lan->language_name)?></a>
+                                            <button class="bg-dark">
+                                                <a href="#" class="font-weight-bolder"><?=ucwords($lan->language_name)?></a>
                                             </button>
                                         @endforeach
                                     </div>
@@ -141,11 +139,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
-    $.get('http://project3.test/recent', function (data) {
-        var courses = data;
-        console.log(courses);
-
-    });
+    // $.get('http://project3.test/recent', function (data) {
+    //     var courses = data;
+    //     console.log(courses);
+    //
+    // });
 
     $(document).ready(function () {
         $('#free').on('change', function (e) {
@@ -167,7 +165,7 @@
                         '<span class="small">' + value.url + '</span>' +
                         '</a>' +
                         '<p>Submitted by ' + $($.each(value, function (user, name) {
-                            console.log(name)
+
                         })) + '</p>' +
                         '</div>'
                     );

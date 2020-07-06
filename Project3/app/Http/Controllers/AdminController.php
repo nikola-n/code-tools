@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Notifications\SendApprovedCourseEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
     public function index()
     {
         $courses = \DB::table('courses')->orderBy('approved', 'asc')->paginate(10);
@@ -18,6 +22,8 @@ class AdminController extends Controller
         $course           = Course::find($id);
         $course->approved = 1;
         $course->save();
+
+        $course->notify(new SendApprovedCourseEmail($course));
 
         return redirect('/admin');
     }

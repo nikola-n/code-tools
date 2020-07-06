@@ -6,22 +6,28 @@ use App\Course;
 use App\Language;
 use App\Subcategory;
 use App\Technology;
+use App\Utilities\CourseFilter;
 
 class CoursesController extends Controller
 {
 
-    public function index($name)
+    public function index($technology_name)
     {
         $languages     = Language::all();
         $subcategories = Subcategory::all();
         $technologies  = Technology::with('courses.subcategories', 'courses.languages', 'courses.votes')
-            ->where('technology_name', $name)
+            ->where('technology_name', $technology_name)
             ->first();
-        $type          = [];
-        $medium        = [];
-        $level         = [];
-        $subcategory   = [];
-        $language      = [];
+        $courses       = Course::with('subcategories')->filterBy(request()->all())->get();
+        if (request()->wantsJson()) {
+            return $courses;
+        }
+
+        $type        = [];
+        $medium      = [];
+        $level       = [];
+        $subcategory = [];
+        $language    = [];
         foreach ($technologies->courses as $types) {
             array_push($type, $types['type']);
             array_push($medium, $types['medium']);
@@ -39,7 +45,7 @@ class CoursesController extends Controller
         $subcategory = array_count_values($subcategory);
         $language    = array_count_values($language);
 
-        return view('courses', compact('technologies', 'languages', 'subcategories', 'type', 'medium', 'level', 'subcategory', 'language'));
+        return view('courses', compact('technologies', 'languages', 'subcategories', 'type', 'medium', 'level', 'subcategory', 'language', 'courses'));
     }
 
     public function store()
@@ -48,7 +54,7 @@ class CoursesController extends Controller
         $course          = new Course(request(['name', 'type', 'medium', 'level', 'url']));
         $course->user_id = auth()->user()->id;
         $course->save();
-        $course->subcategories()->attach(request('subcategory_name'));
+        $course->subcategories()->attach(request('subcategory'));
         $course->languages()->attach(request('languages'));
         $course->technologies()->sync([1, 2, 3, 4]);
 
@@ -68,11 +74,16 @@ class CoursesController extends Controller
         ]);
     }
 
-    public function filters()
+    /**
+     * @param \App\Utilities\CourseFilter $filter
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getCourses(CourseFilter $filter)
     {
-        $filtered = Course::with('subcategories')->filterBy(request()->all())->get();
+        $filtered = Course::filterBy($filter)->get();
 
-        return view('courses', compact($filtered));
+        return view('courses', ['data' => $filtered]);
     }
 
 }
