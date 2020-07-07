@@ -6,7 +6,6 @@ use App\Course;
 use App\Language;
 use App\Subcategory;
 use App\Technology;
-use App\Utilities\CourseFilter;
 
 class CoursesController extends Controller
 {
@@ -18,10 +17,6 @@ class CoursesController extends Controller
         $technologies  = Technology::with('courses.subcategories', 'courses.languages', 'courses.votes')
             ->where('technology_name', $technology_name)
             ->first();
-        $courses       = Course::with('subcategories')->filterBy(request()->all())->get();
-        if (request()->wantsJson()) {
-            return $courses;
-        }
 
         $type        = [];
         $medium      = [];
@@ -45,7 +40,7 @@ class CoursesController extends Controller
         $subcategory = array_count_values($subcategory);
         $language    = array_count_values($language);
 
-        return view('courses', compact('technologies', 'languages', 'subcategories', 'type', 'medium', 'level', 'subcategory', 'language', 'courses'));
+        return view('courses', compact('technologies', 'languages', 'subcategories', 'type', 'medium', 'level', 'subcategory', 'language'));
     }
 
     public function store()
@@ -73,17 +68,4 @@ class CoursesController extends Controller
             'languages'   => 'required',
         ]);
     }
-
-    /**
-     * @param \App\Utilities\CourseFilter $filter
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getCourses(CourseFilter $filter)
-    {
-        $filtered = Course::filterBy($filter)->get();
-
-        return view('courses', ['data' => $filtered]);
-    }
-
 }

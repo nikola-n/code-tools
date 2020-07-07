@@ -36,7 +36,7 @@
                 <div class="mb-2">
                     @foreach($type as $t)
                         @if($loop->first)
-                                <input type="checkbox" name="type" id="free" value="free"> Free ({{$t}}) <br>
+                            <input type="checkbox" name="type" id="free" value="free"> Free ({{$t}}) <br>
                         @endif
                         @if($loop->last)
                             <input type="checkbox" name="type" id="paid" value="paid"> Paid ({{$t}})
@@ -138,35 +138,37 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-
-    // $.get('http://project3.test/recent', function (data) {
-    //     var courses = data;
-    //     console.log(courses);
-    //
-    // });
+    var baseUrl = 'http://project3.test/filtered';
 
     $(document).ready(function () {
         $('#free').on('change', function (e) {
             e.preventDefault();
-            $.get('http://project3.test/filtered?type=free', function (data) {
+
+            var query = '';
+            if($(this).is(':checked')) {
+                query = '?type='+this.value;
+            } else {
+                query = '';
+            }
+
+            $.get('http://project3.test/filtered' + query, function (data) {
                 $('#c').html('');
+
+
                 $.each(data, function (index, value) {
-                    console.log(value);
                     $('#c').append('<div class="col-md-12 d-flex border-bottom selected bg-white">' +
                         '<div class="col-md-1 p-3">' +
                         '<button type="submit" class="btn btn-dark btn-lg" id="vote" data-course-id="">' +
                         '<i class="fas fa-caret-up fa-2x">' +
                         '</i>' +
-                        '<span>' + value.votes + '</span>' +
+                        '<span>' + value.votes_count + '</span>' +
                         '</button>' +
                         '</div>' +
                         '<div class="col-md-11 p-3 ml-3">' +
                         '<a href="' + value.url + '"class="h5 font-weight-bolder text-decoration-none text-dark">' + value.name +
                         '<span class="small">' + value.url + '</span>' +
                         '</a>' +
-                        '<p>Submitted by ' + $($.each(value, function (user, name) {
-
-                        })) + '</p>' +
+                        '<p>Submitted by ' + value.users.name + '</p>' +
                         '</div>'
                     );
 

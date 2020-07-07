@@ -33,7 +33,7 @@ Route::get('/recent', function () {
 });
 
 Route::get('filtered', function () {
-    return Course::with('subcategories')->filterBy(request()->all())->get();
+    return Course::with('subcategories', 'users')->withCount('votes')->filterBy(request()->all())->get();
 });
 
 //Vote button

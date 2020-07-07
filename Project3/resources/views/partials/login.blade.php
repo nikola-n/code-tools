@@ -44,7 +44,7 @@
                                    required autocomplete="email" autofocus>
                             <i class="far fa-envelope icon-form"></i>
                         </div>
-                        @if($errors->has('email'))
+                        @if(session()->get('is_login') && $errors->has('email'))
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         @endif
                     </div>
@@ -55,7 +55,7 @@
                                    placeholder="Password"
                                    required autocomplete="current-password">
                             <i class="fas fa-lock icon-form"></i>
-                            @if($errors->has('password'))
+                            @if(session()->get('is_login') && $errors->has('password'))
                                 <p class="text-danger">{{ $errors->first('password') }}</p>
                             @endif
                         </div>

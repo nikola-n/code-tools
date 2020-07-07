@@ -1,5 +1,5 @@
-<div class="modal fade" id="userSign" tabindex="-1" role="dialog" aria-labelledby="userSign"
-     aria-hidden="true">
+<div class="modal fade {{ session('is_register') && $errors->any() ? 'show' : '' }}" id="userSign" tabindex="-1" role="dialog" aria-labelledby="userSign"
+     aria-hidden="{{ session('is_register') && $errors->any() ? 'false' : 'true' }}">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -35,6 +35,7 @@
                 <div class="divider-with-text">
                     <span class="divider-text text-uppercase">or</span>
                 </div>
+
                 <form action="{{ route('register') }}" method="POST" id="registerForm">
                     @csrf
                     <div class="form-group">
@@ -42,7 +43,7 @@
                             <input type="text" name="name" class="form-control pleft" placeholder="Full Name"
                                    autocomplete="name" autofocus>
                             <i class="fas fa-user icon-form"></i>
-                            @if($errors->has('name'))
+                            @if(session()->get('is_register') && $errors->has('name'))
                                 <p class="text-danger">{{ $errors->first('name') }}</p>
                             @endif
                         </div>
@@ -51,7 +52,7 @@
                         <div class="input-with-icon">
                             <input type="email" name="email" class="form-control pleft" placeholder="Email" required autocomplete="email">
                             <i class="far fa-envelope icon-form"></i>
-                            @if($errors->has('email'))
+                            @if(session()->get('is_register') && $errors->has('email'))
                                 <p class="text-danger">{{ $errors->first('email') }}</p>
                             @endif
                         </div>
@@ -61,7 +62,7 @@
                             <input type="password" name="password" class="form-control pleft" placeholder="Password"
                                    required autocomplete="new-password">
                             <i class="fas fa-lock icon-form"></i>
-                            @if($errors->has('password'))
+                            @if(session()->get('is_register') && $errors->has('password'))
                                 <p class="text-danger">{{ $errors->first('password') }}</p>
                             @endif
                         </div>
